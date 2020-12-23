@@ -3,11 +3,49 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "dev": "concurrently \"npm run serve\" \"npm run watch:main\" \"npm run start\"",
+    "start": "set APP_DEV=true && npm run build:main && electron ./dist/main/index.js",
+    "watch:main": "tsc -w -p ./src/main/tsconfig.json",
+    "build:main": "npm run build:clean && tsc -p ./src/main/tsconfig.json",
+    "build:clean": "rd \"./dist/main\" /S /Q",
+    "build:renderer": "vue-cli-service build --dest ./dist/renderer",
+    "build": "set APP_DEV=false && npm run build:main && npm run build:renderer",
+    "serve": "set APP_DEV=true && vue-cli-service serve",
+    "dist": "npm run build && yarn electron-builder"
+  },
+  "build": {
+    "appId": "electron-vue.cns.mk",
+    "productName": "Electron Vue",
+    "copyright": "Copyright © 2020 Cvetko Stavreski CNS dooel",
+    "icon": "dist/renderer/favicon.ico",
+    "files": [
+      "dist/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ]
+    },
+    "directories": {
+      "buildResources": "dist",
+      "output": "out"
+    }
   },
   "dependencies": {
+    "atom": "github:thecele/atom",
+    "concurrently": "^5.3.0",
     "core-js": "^3.6.5",
+    "electron-builder": "^22.9.1",
+    "electron-context-menu": "^2.3.1",
+    "reflect-metadata": "^0.1.13",
     "register-service-worker": "^1.7.1",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
@@ -22,6 +60,8 @@
     "@vue/cli-plugin-typescript": "~4.5.0",
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
+    "electron": "^11.1.1",
+    "electron-reloader": "^1.1.0",
     "node-sass": "^4.12.0",
     "sass-loader": "^8.0.2",
     "typescript": "~3.9.3",

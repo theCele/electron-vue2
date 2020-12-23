@@ -1,0 +1,35 @@
+{
+    "compilerOptions": {
+      "declaration": false,
+      "noEmitHelpers": false,
+      "removeComments": false,
+      "preserveConstEnums": true,
+      "target": "ESNext",
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "noImplicitReturns": true,
+      "suppressImplicitAnyIndexErrors": true,
+      "strictNullChecks": true,
+      "noUnusedLocals": false,
+      "noImplicitThis": true,
+      //"noUnusedParameters": true,
+      "allowUnreachableCode": true,
+      "importHelpers": true,
+      "moduleResolution": "node",
+      "pretty": true,
+      "module": "commonjs",
+      "noImplicitAny": false,
+      "sourceMap": true,
+      "outDir": "../../dist/main",
+      "baseUrl": ".",
+      "paths": {
+        "*": ["../../node_modules/*"],
+        "@/*": [
+          "./*"
+        ]
+      }
+    },
+    "include": [
+      "./**/*"
+    ]
+}  
