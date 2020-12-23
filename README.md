@@ -1,7 +1,7 @@
 # electron-vue2
 
-## Electron 11.1.1
-## Vue 2.6.11
+### Electron 11.1.1
+### Vue 2.6.11
 
 ## Project setup
 ```
